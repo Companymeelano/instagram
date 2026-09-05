@@ -1,0 +1,18 @@
+Options -Indexes
+DirectoryIndex index.html index.php
+RewriteEngine On
+
+# Public API gateway -> PHP backend router
+RewriteRule ^api/?(.*)$ instapilot_backend/api/index.php?route=$1 [QSA,L]
+
+# Single-file application shell (V48); never serve stale HTML.
+<IfModule mod_headers.c>
+  <FilesMatch "^index\.(html|php)$">
+    Header always set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+    Header always set Pragma "no-cache"
+    Header always set Expires "0"
+  </FilesMatch>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>

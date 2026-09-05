@@ -1,0 +1,3 @@
+<FilesMatch "^(config|\.env|.*\.sql)$">
+  Require all denied
+</FilesMatch>

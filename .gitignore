@@ -1,0 +1,3 @@
+.apk-build/keystore.p8
+.apk-build/cert.pem
+__pycache__/
